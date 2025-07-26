@@ -1,0 +1,8 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="s4glbdesttesterui.controller.MainView">
+    <Page id="page" title="{i18n>title}">
+    <content>
+        <Input xmlns="sap.m" id="destName" placeholder="Lorem Ipsum" value="{local>/destName}" />
+        <Button xmlns="sap.m" text="Test" id="test" press="onPress"/>
+    </content>
+    </Page>
+</mvc:View>

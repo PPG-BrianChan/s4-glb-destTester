@@ -1,0 +1,1 @@
+using destTester as service from '../../srv/services';
