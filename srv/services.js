@@ -3,29 +3,12 @@ const { getDestination } = require('@sap-cloud-sdk/connectivity')
 
 module.exports = (srv) => {
     srv.on('test', async (req) => {
-        let path = `/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/$metadata`
-
-        console.log(req.data.destName);
-
         try {
-
-            const destination = await getDestination({ destinationName: req.data.destName });
-
-            console.log(JSON.stringify(destination))
-
-            if (destination === undefined || destination === null) {
-                throw Error(`Destination ${req.data.destName} not found.`);
-            }
-
-            const result = await executeHttpRequest(
-                destination,
-                {
-                    method: 'get',
-                    URL: path
-                }
-            )
-            console.log(`Response from OData service: ${JSON.stringify(result.data)}`);
-
+            let apiPath = `/sap/opu/odata/IWFND/CATALOGSERVICE;v=2`;                
+            const conn = await cds.connect.to('metadataService');
+            conn.destination = req.data.destName;
+            const result = await conn.get(apiPath);
+            console.log(`POST performed successfully:${JSON.stringify(result)}`);        
             //Return data to be added once connectivity is established successfully
             object = { "message": "TEST" };
             return object;
