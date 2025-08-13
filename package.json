@@ -6,9 +6,10 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
-    "@sap-cloud-sdk/connectivity": "^3.26.4",
-    "@sap-cloud-sdk/http-client": "^3.26.4",
-    "@sap/cds": "^9",
+    "@sap-cloud-sdk/connectivity": "^4.1.1",
+    "@sap-cloud-sdk/http-client": "^4.1.0",
+    "@sap-cloud-sdk/resilience": "^4.1.1",
+    "@sap/cds": "^9.2.0",
     "@sap/xssec": "^4.9.1",
     "express": "^4"
   },
@@ -27,5 +28,15 @@
     "undeploy": "cf undeploy s4-glb-destTester --delete-services --delete-service-keys --delete-service-brokers",
     "build": "rimraf resources mta_archives && mbt build --mtar archive",
     "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
-  }
+  },
+  "cds": {
+    "requires": {
+      "metadataService": {
+        "kind": "odata-v2",
+        "credentials": {
+          "destination": "S4_On_Premise_Technical"
+        }
+      }
+    }
+  }  
 }
